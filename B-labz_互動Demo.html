@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B-labz 智慧營運平台 · 客製 Demo 款</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.7.0/dist/tabler-icons.min.css">
+<style>
+  :root{
+    --accent:#3B82F6; --cyan:#22D3EE;
+    --color-background-primary:#0E1525; --color-background-secondary:#18233E;
+    --color-background-info:rgba(59,130,246,0.16); --color-background-danger:rgba(251,113,133,0.14); --color-background-success:rgba(74,222,128,0.13);
+    --color-text-primary:#E7EDF8; --color-text-secondary:#93A1C0; --color-text-tertiary:#65749A;
+    --color-text-info:#5BA3FF; --color-text-danger:#FB7185; --color-text-success:#4ADE80;
+    --color-border-tertiary:rgba(120,150,220,0.16); --color-border-secondary:rgba(120,150,220,0.30);
+    --border-radius-md:8px; --border-radius-lg:14px;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; color:var(--color-text-primary);
+    background:radial-gradient(1100px 520px at 50% -12%, rgba(59,130,246,0.16), transparent 60%), radial-gradient(800px 400px at 90% 10%, rgba(34,211,238,0.08), transparent 60%), #070B14;
+    font-family:"Noto Sans TC","Segoe UI",system-ui,sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:940px; margin:28px auto; padding:0 16px;}
+  .num{font-family:"JetBrains Mono",monospace; letter-spacing:-0.5px;}
+
+  .topbar{display:flex; align-items:center; gap:14px; padding:16px 20px; margin-bottom:18px;
+    background:linear-gradient(120deg, rgba(59,130,246,0.10), rgba(34,211,238,0.04)); border:1px solid var(--color-border-tertiary);
+    border-radius:var(--border-radius-lg);}
+  .topbar .dot{width:38px;height:38px;border-radius:10px;flex-shrink:0;
+    background:linear-gradient(135deg,#3B82F6,#22D3EE); color:#06101F; display:flex; align-items:center; justify-content:center;
+    font-family:"Space Grotesk",sans-serif; font-weight:700; font-size:22px; box-shadow:0 0 22px rgba(59,130,246,0.45);}
+  .topbar .name{font-family:"Space Grotesk","Noto Sans TC",sans-serif; font-weight:700; font-size:18px; letter-spacing:.3px;}
+  .topbar small{color:var(--color-text-secondary); font-size:12px;}
+  .pill{margin-left:auto; display:inline-flex; align-items:center; gap:7px; font-family:"JetBrains Mono",monospace; font-size:11px;
+    color:var(--cyan); border:1px solid rgba(34,211,238,0.35); background:rgba(34,211,238,0.07); padding:5px 11px; border-radius:20px; letter-spacing:1px;}
+  .pill .led{width:7px;height:7px;border-radius:50%;background:var(--cyan); box-shadow:0 0 9px var(--cyan);}
+
+  .eyebrow{font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:2px; color:var(--cyan); text-transform:uppercase; margin-bottom:6px;}
+  h3{font-family:"Space Grotesk","Noto Sans TC",sans-serif; font-weight:500;}
+
+  .shell{display:flex; min-height:520px; border:1px solid var(--color-border-tertiary); border-radius:var(--border-radius-lg);
+    overflow:hidden; background:var(--color-background-primary); box-shadow:0 18px 50px rgba(0,0,0,0.45);}
+
+  button{font-family:inherit; background:rgba(255,255,255,0.03); border:1px solid var(--color-border-secondary);
+    border-radius:var(--border-radius-md); padding:8px 13px; cursor:pointer; color:var(--color-text-primary);
+    display:inline-flex; align-items:center; gap:6px; transition:all .15s;}
+  button:hover{background:rgba(255,255,255,0.07); border-color:var(--accent);}
+  button:active{transform:scale(0.98);}
+  button:disabled{opacity:0.4; cursor:not-allowed;}
+  .btn-primary{background:linear-gradient(135deg,#3B82F6,#22D3EE); border:none; color:#06101F; font-weight:700;
+    box-shadow:0 0 18px rgba(59,130,246,0.35);}
+  .btn-primary:hover{filter:brightness(1.08); border:none;}
+
+  .nav{justify-content:flex-start !important; width:100%; border:none !important; gap:9px; font-size:13px; padding:9px 11px;
+    color:var(--color-text-secondary); background:transparent; border-radius:9px; position:relative;}
+  .nav:hover{background:rgba(255,255,255,0.05); color:var(--color-text-primary);}
+  .nav.on{background:var(--color-background-info); color:#BFE0FF;}
+  .nav.on::before{content:""; position:absolute; left:0; top:7px; bottom:7px; width:3px; border-radius:3px; background:linear-gradient(#3B82F6,#22D3EE); box-shadow:0 0 10px rgba(59,130,246,0.6);}
+  .nav i{font-size:16px;}
+
+  .card{background:var(--color-background-secondary); border:1px solid var(--color-border-tertiary); border-radius:var(--border-radius-md);}
+  table{border-collapse:collapse;}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);}
+  .c-blue{background:rgba(59,130,246,0.16); color:#8FBEFF; border:1px solid rgba(59,130,246,0.32);}
+  .c-teal{background:rgba(45,212,191,0.16); color:#5EEAD4; border:1px solid rgba(45,212,191,0.32);}
+  .c-amber{background:rgba(251,191,36,0.16); color:#FCD34D; border:1px solid rgba(251,191,36,0.32);}
+  .c-coral{background:rgba(248,113,90,0.18); color:#FCA98D; border:1px solid rgba(248,113,90,0.34);}
+  .c-gray{background:rgba(148,163,184,0.14); color:#AEB8CC; border:1px solid rgba(148,163,184,0.26);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <span class="dot">B</span>
+    <div>
+      <div class="name">B-labz 智慧營運平台</div>
+      <small>AI 客製化導入 · 客製 Demo 款</small>
+    </div>
+    <span class="pill"><span class="led"></span>LIVE DEMO</span>
+  </div>
+
+<div class="shell">
+  <h2 class="sr-only">B-labz 智慧營運平台示意</h2>
+
+  <aside style="width:196px; background:#0B1322; border-right:1px solid var(--color-border-tertiary); padding:14px 10px; flex-shrink:0;">
+    <p style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--color-text-tertiary); margin:6px 10px 4px;">FINANCE / 財務</p>
+    <button class="nav" data-p="fin"><i class="ti ti-report-money"></i>即時財務報表</button>
+    <p style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--color-text-tertiary); margin:12px 10px 4px;">OPS / 營管</p>
+    <button class="nav" data-p="price"><i class="ti ti-chart-line"></i>歷史貨價分析</button>
+    <button class="nav" data-p="quote"><i class="ti ti-calculator"></i>報價採購預算</button>
+    <button class="nav" data-p="verify"><i class="ti ti-checklist"></i>廠商請款核實</button>
+    <p style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--color-text-tertiary); margin:12px 10px 4px;">ENG / 工程</p>
+    <button class="nav" data-p="plan"><i class="ti ti-clipboard-list"></i>施工計畫生成</button>
+    <button class="nav" data-p="photo"><i class="ti ti-photo"></i>施工照片分類</button>
+  </aside>
+
+  <main style="flex:1; padding:22px 24px; min-width:0;">
+
+    <section class="panel" data-p="photo">
+      <div style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:4px;">
+        <div>
+          <div class="eyebrow">Module 06 · 工程</div>
+          <h3 style="margin:0; font-size:18px;">施工照片智慧分類</h3>
+          <p style="margin:4px 0 0; font-size:13px; color:var(--color-text-secondary);">已匯入 12 張 · 自動去重、篩日期、剔除不良後分類</p>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button id="runScreen" class="btn-primary" style="font-size:13px;"><i class="ti ti-wand"></i> 開始智慧篩選</button>
+          <button id="genReport" style="font-size:13px;" disabled>生成相片報表</button>
+        </div>
+      </div>
+      <div id="screenStats" style="display:none; gap:8px; margin:14px 0; grid-template-columns:repeat(4,1fr);"></div>
+      <div id="photoGrid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:16px;"></div>
+      <div id="reportOut" class="card" style="display:none; margin-top:14px; padding:12px 14px; font-size:13px;"></div>
+    </section>
+
+    <section class="panel" data-p="fin" style="display:none;">
+      <div class="eyebrow">Module 01 · 財務</div>
+      <h3 style="margin:0 0 2px; font-size:18px;">即時財務報表</h3>
+      <p style="margin:0 0 16px; font-size:13px; color:var(--color-text-secondary);">串接資料即時產出三大報表與 KPI，可用自然語言追問</p>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:18px;">
+        <div class="card" style="padding:13px;"><div style="font-size:12px; color:var(--color-text-secondary);">本月營收</div><div class="num" style="font-size:23px; font-weight:500; color:var(--cyan);">$4.82M</div></div>
+        <div class="card" style="padding:13px;"><div style="font-size:12px; color:var(--color-text-secondary);">毛利率</div><div class="num" style="font-size:23px; font-weight:500; color:var(--color-text-danger);">28.4%</div></div>
+        <div class="card" style="padding:13px;"><div style="font-size:12px; color:var(--color-text-secondary);">應收帳款</div><div class="num" style="font-size:23px; font-weight:500;">$3.1M</div></div>
+        <div class="card" style="padding:13px;"><div style="font-size:12px; color:var(--color-text-secondary);">現金</div><div class="num" style="font-size:23px; font-weight:500;">$6.7M</div></div>
+      </div>
+      <div style="position:relative; width:100%; height:200px;"><canvas id="finChart" role="img" aria-label="近六個月營收與毛利長條圖"></canvas></div>
+      <div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="askq" style="font-size:13px;"><i class="ti ti-sparkles"></i> 本月毛利率為何下降？</button>
+        <button class="askq" style="font-size:13px;"><i class="ti ti-sparkles"></i> 哪個工案最賺錢？</button>
+      </div>
+      <div id="finAns" style="display:none; margin-top:12px; padding:12px 14px; background:var(--color-background-info); color:#BFE0FF; border:1px solid rgba(59,130,246,0.3); border-radius:var(--border-radius-md); font-size:13px;"></div>
+    </section>
+
+    <section class="panel" data-p="verify" style="display:none;">
+      <div class="eyebrow">Module 04 · 營管</div>
+      <h3 style="margin:0 0 2px; font-size:18px;">廠商請款核實</h3>
+      <p style="margin:0 0 16px; font-size:13px; color:var(--color-text-secondary);">請款單 × 交貨明細 × 合約議定價 三方自動勾稽，差異標紅</p>
+      <table style="width:100%; border-collapse:collapse; font-size:13px; table-layout:fixed;">
+        <thead><tr style="text-align:left; color:var(--color-text-tertiary); font-family:'JetBrains Mono',monospace; font-size:11px;">
+          <th style="padding:8px 6px; font-weight:500;">品項</th><th style="padding:8px 6px; font-weight:500;">請款</th><th style="padding:8px 6px; font-weight:500;">交貨</th><th style="padding:8px 6px; font-weight:500;">合約價</th><th style="padding:8px 6px; font-weight:500;">結果</th>
+        </tr></thead>
+        <tbody id="verifyBody"></tbody>
+      </table>
+    </section>
+
+    <section class="panel" data-p="price" style="display:none;">
+      <div class="eyebrow">Module 02 · 營管</div>
+      <h3 style="margin:0 0 2px; font-size:18px;">歷史貨價整合分析</h3>
+      <p style="margin:0 0 16px; font-size:13px; color:var(--color-text-secondary);">匯入歷史貨價，自動清洗品項後分析趨勢、波動與異常價</p>
+      <div style="position:relative; width:100%; height:200px;"><canvas id="priceChart" role="img" aria-label="主要建材歷史價格趨勢折線圖"></canvas></div>
+      <div style="margin-top:16px; display:grid; grid-template-columns:repeat(3,1fr); gap:10px;">
+        <div class="card" style="padding:13px;"><div style="font-size:12px; color:var(--color-text-secondary);">鋼筋 (年漲)</div><div class="num" style="font-size:19px; font-weight:500; color:var(--color-text-danger);">+12.3%</div></div>
+        <div class="card" style="padding:13px;"><div style="font-size:12px; color:var(--color-text-secondary);">混凝土</div><div class="num" style="font-size:19px; font-weight:500; color:var(--color-text-success);">−2.1%</div></div>
+        <div class="card" style="padding:13px;"><div style="font-size:12px; color:var(--color-text-secondary);">異常報價偵測</div><div class="num" style="font-size:19px; font-weight:500; color:var(--cyan);">2 筆</div></div>
+      </div>
+    </section>
+
+    <section class="panel" data-p="quote" style="display:none;">
+      <div class="eyebrow">Module 03 · 營管</div>
+      <h3 style="margin:0 0 2px; font-size:18px;">報價成本及採購預算生成</h3>
+      <p style="margin:0 0 16px; font-size:13px; color:var(--color-text-secondary);">結合歷史貨價＋即時市場價＋物價指數，推算成本與建議報價</p>
+      <div class="card" style="padding:16px;">
+        <div style="display:flex; justify-content:space-between; font-size:13px; padding:7px 0; border-bottom:1px solid var(--color-border-tertiary);"><span>材料成本（含波動調整 +3.5%）</span><span class="num" style="font-weight:500;">$1,284,000</span></div>
+        <div style="display:flex; justify-content:space-between; font-size:13px; padding:7px 0; border-bottom:1px solid var(--color-border-tertiary);"><span>人工＋機具</span><span class="num" style="font-weight:500;">$642,000</span></div>
+        <div style="display:flex; justify-content:space-between; font-size:13px; padding:7px 0; border-bottom:1px solid var(--color-border-tertiary);"><span>管理費＋利潤（15%）</span><span class="num" style="font-weight:500;">$289,000</span></div>
+        <div style="display:flex; justify-content:space-between; align-items:center; font-size:15px; padding:12px 0 2px;"><span style="font-weight:500;">建議報價</span><span class="num" style="font-weight:700; font-size:22px; color:var(--cyan);">$2,215,000</span></div>
+      </div>
+      <p style="margin:12px 2px 0; font-size:12px; color:var(--color-text-tertiary);"><i class="ti ti-info-circle"></i> 即時市場價需串接報價來源，為導入時待確認之資料依賴項。</p>
+    </section>
+
+    <section class="panel" data-p="plan" style="display:none;">
+      <div class="eyebrow">Module 05 · 工程</div>
+      <h3 style="margin:0 0 2px; font-size:18px;">工案施工計畫生成</h3>
+      <p style="margin:0 0 16px; font-size:13px; color:var(--color-text-secondary);">讀業主規範＋歷史類似工案知識庫，生成施工計畫草稿</p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:stretch;">
+        <div class="card" style="flex:1; min-width:200px; padding:16px; font-size:13px;">
+          <div style="font-weight:500; margin-bottom:10px; color:var(--color-text-secondary);"><i class="ti ti-file-text"></i> 輸入</div>
+          <div style="line-height:2.0;">業主規範 PDF<br>案件基本資料<br>歷史類似工案</div>
+        </div>
+        <div style="display:flex; align-items:center; color:var(--cyan);"><i class="ti ti-arrow-right" style="font-size:24px;"></i></div>
+        <div style="flex:1.5; min-width:220px; padding:16px; font-size:13px; border-radius:var(--border-radius-md); background:linear-gradient(135deg, rgba(59,130,246,0.14), rgba(34,211,238,0.06)); border:1px solid rgba(59,130,246,0.3);">
+          <div style="font-weight:500; margin-bottom:10px; color:#BFE0FF;"><i class="ti ti-checklist"></i> 自動產出計畫草稿</div>
+          <div style="line-height:2.0;">工序與工期（甘特圖）<br>人機料需求<br>品管 / 安衛計畫</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+  <p style="text-align:center; color:var(--color-text-tertiary); font-size:11px; margin-top:18px; font-family:'JetBrains Mono',monospace; letter-spacing:1px;">B-labz · AI SMART OPERATIONS · 客製 DEMO 款</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+(function(){
+  var panels = document.querySelectorAll('.panel');
+  var navs = document.querySelectorAll('.nav');
+  function show(p){
+    panels.forEach(function(s){ s.style.display = s.dataset.p===p ? 'block' : 'none'; });
+    navs.forEach(function(b){ b.classList.toggle('on', b.dataset.p===p); });
+  }
+  navs.forEach(function(b){ b.addEventListener('click', function(){ show(b.dataset.p); }); });
+  show('photo');
+
+  var photos = [
+    {c:'c-blue', t:'基礎', s:'ok'},   {c:'c-blue', t:'基礎', s:'dup'},
+    {c:'c-amber', t:'鋼筋', s:'ok'},  {c:'c-gray', t:'模糊', s:'bad'},
+    {c:'c-teal', t:'模板', s:'ok'},   {c:'c-amber', t:'鋼筋', s:'dup'},
+    {c:'c-coral', t:'澆置', s:'ok'},  {c:'c-blue', t:'基礎', s:'dup'},
+    {c:'c-gray', t:'無關', s:'bad'},  {c:'c-teal', t:'模板', s:'ok'},
+    {c:'c-amber', t:'鋼筋', s:'date'},{c:'c-coral', t:'澆置', s:'ok'}
+  ];
+  var labels = {dup:'重複', bad:'不良', date:'日期外', ok:''};
+  var grid = document.getElementById('photoGrid');
+  function renderPhotos(screened){
+    grid.innerHTML='';
+    photos.forEach(function(p){
+      var keep = !screened || p.s==='ok';
+      var badge = screened && p.s!=='ok' ? '<span style="position:absolute; top:5px; left:5px; font-size:10px; padding:1px 7px; border-radius:10px; background:var(--color-background-danger); color:var(--color-text-danger);">'+labels[p.s]+'</span>' : (screened ? '<span style="position:absolute; top:5px; left:5px; font-size:10px; padding:1px 7px; border-radius:10px; background:var(--color-background-success); color:var(--color-text-success);">已分類</span>':'');
+      var el = document.createElement('div');
+      el.className = p.c;
+      el.style.cssText = 'position:relative; height:76px; border-radius:var(--border-radius-md); display:flex; align-items:center; justify-content:center; opacity:'+(keep?'1':'0.25')+'; transition:opacity .45s;';
+      el.innerHTML = badge + '<i class="ti ti-photo" style="font-size:22px;"></i><span class="num" style="position:absolute; bottom:5px; right:7px; font-size:10px;">'+p.t+'</span>';
+      grid.appendChild(el);
+    });
+  }
+  renderPhotos(false);
+
+  document.getElementById('runScreen').addEventListener('click', function(){
+    renderPhotos(true);
+    var dup=photos.filter(function(p){return p.s==='dup';}).length;
+    var bad=photos.filter(function(p){return p.s==='bad';}).length;
+    var date=photos.filter(function(p){return p.s==='date';}).length;
+    var ok=photos.filter(function(p){return p.s==='ok';}).length;
+    var stats=document.getElementById('screenStats');
+    stats.style.display='grid';
+    var cells=[['去重移除',dup,'danger'],['剔除不良',bad,'danger'],['日期不符',date,'danger'],['保留分類',ok,'success']];
+    stats.innerHTML=cells.map(function(c){return '<div class="card" style="padding:10px 12px;"><div style="font-size:12px; color:var(--color-text-secondary);">'+c[0]+'</div><div class="num" style="font-size:21px; font-weight:500; color:var(--color-text-'+c[2]+');">'+c[1]+'</div></div>';}).join('');
+    document.getElementById('genReport').disabled=false;
+  });
+  document.getElementById('genReport').addEventListener('click', function(){
+    var out=document.getElementById('reportOut');
+    out.style.display='block';
+    out.innerHTML='<div style="font-weight:500; margin-bottom:6px; color:var(--cyan);"><i class="ti ti-file-report"></i> 已生成施工相片月報（5 張，4 類）</div>基礎工程 ×1 · 鋼筋綁紮 ×1 · 模板工程 ×2 · 混凝土澆置 ×1，依拍攝日期排序，可一鍵匯出 PDF。';
+  });
+
+  document.querySelectorAll('.askq').forEach(function(b){
+    b.addEventListener('click', function(){
+      var ans=document.getElementById('finAns');
+      ans.style.display='block';
+      ans.textContent = b.textContent.indexOf('毛利')>=0
+        ? '毛利率較上月下降 4.2pt，主因鋼筋採購單價上漲 12%，集中於 A 工案；建議檢視該案議價空間。'
+        : 'B 都更案毛利率 34%，居各工案之冠；C 公共工程因加班費偏高僅 19%。';
+    });
+  });
+
+  if(window.Chart){ Chart.defaults.color='#93A1C0'; Chart.defaults.font.family="'JetBrains Mono','Noto Sans TC',sans-serif"; }
+  function mk(id,cfg){ var c=document.getElementById(id); if(c && window.Chart) new Chart(c,cfg); }
+  var gridc={color:'rgba(140,160,210,0.10)'};
+  mk('finChart',{type:'bar',data:{labels:['1月','2月','3月','4月','5月','6月'],datasets:[{label:'營收',data:[3.9,4.2,4.0,4.5,4.6,4.82],backgroundColor:'#3B82F6',borderRadius:4},{label:'毛利',data:[1.3,1.4,1.3,1.4,1.35,1.37],backgroundColor:'#22D3EE',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,labels:{boxWidth:10}}},scales:{y:{grid:gridc},x:{grid:{display:false}}}}});
+  mk('priceChart',{type:'line',data:{labels:['Q1','Q2','Q3','Q4','Q1','Q2'],datasets:[{label:'鋼筋',data:[100,104,108,110,112,113],borderColor:'#FB7185',backgroundColor:'#FB7185',tension:.3,pointRadius:2},{label:'混凝土',data:[100,101,99,100,98,98],borderColor:'#22D3EE',backgroundColor:'#22D3EE',borderDash:[6,4],tension:.3,pointRadius:2},{label:'模板',data:[100,102,103,105,106,108],borderColor:'#4ADE80',backgroundColor:'#4ADE80',borderDash:[2,3],tension:.3,pointRadius:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,labels:{boxWidth:10}}},scales:{y:{grid:gridc},x:{grid:{display:false}}}}});
+
+  var vrows=[
+    ['鋼筋 #4','$420,000','$420,000','$420,000','ok'],
+    ['預拌混凝土','$185,000','$170,000','$185,000','數量不符'],
+    ['模板','$96,000','$96,000','$88,000','單價超約'],
+    ['鷹架租賃','$54,000','$54,000','$54,000','ok']
+  ];
+  document.getElementById('verifyBody').innerHTML = vrows.map(function(r){
+    var ok=r[4]==='ok';
+    var cell=ok?'<span style="color:var(--color-text-success);"><i class="ti ti-check"></i> 相符</span>':'<span style="color:var(--color-text-danger);"><i class="ti ti-alert-triangle"></i> '+r[4]+'</span>';
+    var bg=ok?'':'background:var(--color-background-danger);';
+    return '<tr style="border-top:1px solid var(--color-border-tertiary); '+bg+'"><td style="padding:9px 6px;">'+r[0]+'</td><td class="num" style="padding:9px 6px;">'+r[1]+'</td><td class="num" style="padding:9px 6px;">'+r[2]+'</td><td class="num" style="padding:9px 6px;">'+r[3]+'</td><td style="padding:9px 6px; font-weight:500;">'+cell+'</td></tr>';
+  }).join('');
+})();
+</script>
+</body>
+</html>
